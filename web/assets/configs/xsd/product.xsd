@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://tupt0101.github.io/xsd/product"
+           targetNamespace="http://tupt0101.github.io/xsd/product"
+           elementFormDefault="qualified">
+    <xs:element name="Product">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string"></xs:element>
+                <xs:element name="Category" type="xs:string"></xs:element>
+                <xs:element name="ImageUrl" type="xs:string"></xs:element>
+                <xs:element name="Size" type="xs:string"></xs:element>
+                <xs:element name="Color" type="xs:string"></xs:element>
+                <xs:element name="Price" type="xs:unsignedInt"></xs:element>
+                <xs:element name="Unit" type="xs:string"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
