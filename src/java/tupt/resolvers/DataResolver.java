@@ -45,6 +45,7 @@ public class DataResolver implements Serializable {
 
             // insert supplier to DB
             supplier = supplierClient.createSupplier_XML(supplier, Supplier.class);
+            System.out.println(supplier.toString());
         }
 
         List<tupt.generated.Product> products = materials.getProduct();
@@ -73,6 +74,7 @@ public class DataResolver implements Serializable {
                 category.setName(prod.getCategory());
 
                 category = categoryClient.createCategory_XML(category, Category.class);
+                System.out.println(category.toString());
             }
 
             Product product = new Product();

@@ -38,6 +38,8 @@ public class TestController extends HttpServlet {
             String realPath = request.getServletContext().getRealPath("/");
             String xmlPath = realPath + PathConstant.CONFIG_XML;
 
+//            String realPath2 = getServletContext().getRealPath("/");
+            
             int totalDomain = PathConstant.CONFIG_XSL.size();
             
             System.out.println("Start crawling...");
