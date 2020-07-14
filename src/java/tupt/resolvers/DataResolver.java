@@ -14,10 +14,14 @@ import org.xml.sax.SAXException;
 import tupt.clients.CategoryClient;
 import tupt.clients.ProductClient;
 import tupt.clients.SupplierClient;
+import tupt.clients.TagClient;
+import tupt.clients.TagProductClient;
 import tupt.constants.PathConstant;
 import tupt.entities.Category;
 import tupt.entities.Product;
 import tupt.entities.Supplier;
+import tupt.entities.Tag;
+import tupt.entities.TagProduct;
 import tupt.generated.Materials;
 import tupt.utils.JAXBUtil;
 
@@ -35,6 +39,10 @@ public class DataResolver implements Serializable {
         SupplierClient supplierClient = new SupplierClient();
         CategoryClient categoryClient = new CategoryClient();
         ProductClient productClient = new ProductClient();
+        TagClient tagClient = new TagClient();
+        TagProductClient tagProductClient = new TagProductClient();
+
+        List<Tag> listTagFromDB = tagClient.findAll_XML();
 
         Supplier supplier = supplierClient.findByName(Supplier.class, materials.getSupplier());
         if (supplier == null) {
@@ -65,7 +73,7 @@ public class DataResolver implements Serializable {
                     category = new Category();
                     category.setId(0);
                     category.setName(prod.getCategory());
-                    
+
                     category = categoryClient.createCategory_XML(category, Category.class);
                 }
             } else {
@@ -80,6 +88,7 @@ public class DataResolver implements Serializable {
             Product product = new Product();
             product.setId(0);
             product.setName(prod.getName().toUpperCase());
+            product.setUrl(prod.getUrl());
             product.setCategory(category);
             product.setImageUrl(prod.getImageUrl());
             product.setSize(prod.getSize());
@@ -90,7 +99,40 @@ public class DataResolver implements Serializable {
 
             // insert product to DB
             product = productClient.createProduct_XML(product, Product.class);
-            System.out.println(product.toString());
+
+            String[] productColors = product.getColor().split(" ");
+            for (int i = 0; i < productColors.length; i++) {
+                if (product.getName().toLowerCase().contains("gạch")) {
+                    if (productColors[i].toLowerCase().equals("đen")
+                            || productColors[i].toLowerCase().equals("xám")
+                            || productColors[i].toLowerCase().equals("nâu")
+                            || productColors[i].toLowerCase().equals("trắng")) {
+                        for (Tag tag : listTagFromDB) {
+                            if (tag.getName().equals("trung tính")) {
+                                TagProduct tagProduct = new TagProduct();
+                                tagProduct.setId(0);
+                                tagProduct.setProductID(product);
+                                tagProduct.setTagID(tag);
+
+                                tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                                System.out.println("tag inserted: trung tinh");
+                            }
+                        }
+                    } else {
+                        for (Tag tag : listTagFromDB) {
+                            if (tag.getName().equals("tươi sáng")) {
+                                TagProduct tagProduct = new TagProduct();
+                                tagProduct.setId(0);
+                                tagProduct.setTagID(tag);
+                                tagProduct.setProductID(product);
+
+                                tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                                System.out.println("tag inserted: tươi sáng");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

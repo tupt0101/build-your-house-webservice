@@ -1,7 +1,6 @@
 
 package tupt.generated;
 
-import java.io.UnsupportedEncodingException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -21,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Url" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="Category" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="ImageUrl" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="Size" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "name",
+    "url",
     "category",
     "imageUrl",
     "size",
@@ -50,6 +51,8 @@ public class Product {
 
     @XmlElement(name = "Name", namespace = "http://tupt0101.github.io/xsd/product", required = true)
     protected String name;
+    @XmlElement(name = "Url", namespace = "http://tupt0101.github.io/xsd/product", required = true)
+    protected String url;
     @XmlElement(name = "Category", namespace = "http://tupt0101.github.io/xsd/product", required = true)
     protected String category;
     @XmlElement(name = "ImageUrl", namespace = "http://tupt0101.github.io/xsd/product", required = true)
@@ -86,6 +89,30 @@ public class Product {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the url property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets the value of the url property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrl(String value) {
+        this.url = value;
     }
 
     /**

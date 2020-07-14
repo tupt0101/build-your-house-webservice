@@ -89,7 +89,7 @@ public class RegistrationFacadeREST extends AbstractFacade<Registration> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     @GET
     @Path("login")
     @Produces(MediaType.APPLICATION_XML)
@@ -99,14 +99,14 @@ public class RegistrationFacadeREST extends AbstractFacade<Registration> {
         query.setParameter("password", password);
         return (Registration) query.getSingleResult();
     }
-    
+
     @GET
     @Path("crawl")
     @Produces(MediaType.APPLICATION_XML)
     public String doCrawl() {
         String result = "";
         try {
-            
+
         } catch (Exception e) {
         }
         return result;

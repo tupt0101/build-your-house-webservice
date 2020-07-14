@@ -23,9 +23,9 @@ import tupt.resolvers.DataResolver;
  * @author sherl
  */
 @WebServlet(name = "TestController", urlPatterns = {"/TestController"})
-public class TestController extends HttpServlet {
+public class CrawlController extends HttpServlet {
 
-    private static final String ADMIN = "admin.jsp";
+    private static final String SUCCESS = "index.html";
     private static final String ERROR = "error.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,11 +34,10 @@ public class TestController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        String url = ERROR;
         try {
             String realPath = request.getServletContext().getRealPath("/");
             String xmlPath = realPath + PathConstant.CONFIG_XML;
-
-//            String realPath2 = getServletContext().getRealPath("/");
             
             int totalDomain = PathConstant.CONFIG_XSL.size();
             
@@ -63,8 +62,11 @@ public class TestController extends HttpServlet {
                 }
             }
             System.out.println("Crawl successfully!");
+            url = SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

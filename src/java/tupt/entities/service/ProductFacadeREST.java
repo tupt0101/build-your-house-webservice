@@ -45,20 +45,20 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, Product entity) {
+    public void edit(@PathParam("id") Integer id, Product entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Product find(@PathParam("id") String id) {
+    public Product find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
@@ -87,7 +87,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     @POST
     @Path("insert")
     @Consumes(MediaType.APPLICATION_XML)

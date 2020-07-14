@@ -33,6 +33,8 @@ public class ApplicationConfig extends Application {
         resources.add(tupt.entities.service.ProductFacadeREST.class);
         resources.add(tupt.entities.service.RegistrationFacadeREST.class);
         resources.add(tupt.entities.service.SupplierFacadeREST.class);
+        resources.add(tupt.entities.service.TagFacadeREST.class);
+        resources.add(tupt.entities.service.TagProductFacadeREST.class);
     }
     
 }

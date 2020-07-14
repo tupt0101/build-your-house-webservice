@@ -48,20 +48,20 @@ public class SupplierFacadeREST extends AbstractFacade<Supplier> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, Supplier entity) {
+    public void edit(@PathParam("id") Integer id, Supplier entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Supplier find(@PathParam("id") String id) {
+    public Supplier find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
@@ -90,14 +90,14 @@ public class SupplierFacadeREST extends AbstractFacade<Supplier> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     @POST
     @Path("insert")
     @Consumes(MediaType.APPLICATION_XML)
     public Supplier insert(Supplier supplier) {
         super.create(supplier);
         return supplier;
-    }
+}
 
     @GET
     @Path("findByName")

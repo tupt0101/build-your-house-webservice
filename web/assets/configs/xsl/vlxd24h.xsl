@@ -32,6 +32,7 @@
 
         <xsl:for-each select="$products//li">
             <xsl:variable name="name" select="div/strong/a"/>
+            <xsl:variable name="url" select="div/strong/a/@href"/>
             <xsl:variable name="image" select="div/a/img/@src"/>
             <xsl:variable name="size" select="'NG'"/>
             <xsl:variable name="color" select="'NG'"/>
@@ -40,6 +41,9 @@
             <xsl:element name="Product" xmlns="http://tupt0101.github.io/xsd/product">
                 <xsl:element name="Name">
                     <xsl:value-of select="$name"/>
+                </xsl:element>
+                <xsl:element name="Url">
+                    <xsl:value-of select="concat('http://vatlieuxaydung24h.vn', $url)"/>
                 </xsl:element>
                 <xsl:element name="Category">
                     <xsl:value-of select="$categoryName"/>

@@ -6,7 +6,9 @@
 package tupt.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,8 +40,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM Product p WHERE p.size = :size")
     , @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM Product p WHERE p.color = :color")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
-    , @NamedQuery(name = "Product.findByUnit", query = "SELECT p FROM Product p WHERE p.unit = :unit")})
+    , @NamedQuery(name = "Product.findByUnit", query = "SELECT p FROM Product p WHERE p.unit = :unit")
+    , @NamedQuery(name = "Product.findCement", query = "SELECT p FROM Product p WHERE p.name LIKE 'xi măng%' AND p.unit = 'tấn'")
+    , @NamedQuery(name = "Product.findRock", query = "SELECT p FROM Product p WHERE p.name LIKE 'đá 1x2%'")
+    , @NamedQuery(name = "Product.findSand", query = "SELECT p FROM Product p WHERE p.name LIKE 'cát%vàng'")
+    , @NamedQuery(name = "Product.findSteel", query = "SELECT p FROM Product p WHERE p.name LIKE 'thép%' AND p.unit = 'kg'")
+    , @NamedQuery(name = "Product.findBrick", query = "SELECT p FROM Product p WHERE p.name LIKE 'gạch%6 lỗ%'")
+    , @NamedQuery(name = "Product.findTile", query = "SELECT p FROM Product p WHERE p.name LIKE 'ngói lợp%' OR p.name LIKE 'ngói màu%'")
+})
 public class Product implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productID")
+    private Collection<TagProduct> tagProductCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,6 +63,9 @@ public class Product implements Serializable {
     @Size(max = 50)
     @Column(name = "Name")
     private String name;
+    @Size(max = 200)
+    @Column(name = "Url")
+    private String url;
     @Size(max = 200)
     @Column(name = "ImageUrl")
     private String imageUrl;
@@ -91,6 +108,14 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getImageUrl() {
@@ -173,5 +198,14 @@ public class Product implements Serializable {
     public String toString() {
         return "tupt.entities.Product[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<TagProduct> getTagProductCollection() {
+        return tagProductCollection;
+    }
+
+    public void setTagProductCollection(Collection<TagProduct> tagProductCollection) {
+        this.tagProductCollection = tagProductCollection;
+    }
+
 }

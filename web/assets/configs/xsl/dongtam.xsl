@@ -32,6 +32,7 @@
 
         <xsl:for-each select="$products/div[contains(@class, 'product-grid-item')]">
             <xsl:variable name="name" select="h3[@class='product-title']"/>
+            <xsl:variable name="url" select="div[@class='product-element-top']/a/@href"/>
             <xsl:variable name="image" select="div/a/img/@src"/>
             <xsl:variable name="size" select="div/div[@class='dt-prod-attr'][1]/span"/>
             <xsl:variable name="color" select="div/div[@class='dt-prod-attr'][2]/span"/>
@@ -40,6 +41,9 @@
             <xsl:element name="Product" xmlns="http://tupt0101.github.io/xsd/product">
                 <xsl:element name="Name">
                     <xsl:value-of select="$name"/>
+                </xsl:element>
+                <xsl:element name="Url">
+                    <xsl:value-of select="$url"/>
                 </xsl:element>
                 <xsl:element name="Category">
                     <xsl:value-of select="$categoryName"/>
@@ -69,9 +73,6 @@
                 </xsl:element>
                 <xsl:element name="Price">
                     <xsl:value-of select="translate(substring-before($price, ' '), '.', '')"/>
-<!--                    <xsl:call-template name="normalize-price">
-                        <xsl:with-param name="price" select="translate($price, '.', '')"/>
-                    </xsl:call-template>-->
                 </xsl:element>
                 <xsl:element name="Unit">
                     <xsl:value-of select="translate($unit, ' /', '')"/>

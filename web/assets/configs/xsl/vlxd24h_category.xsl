@@ -14,6 +14,8 @@
         <xsl:variable name="vatlieutho" select="'VẬT LIỆU THÔ'"/>
         <xsl:variable name="gachblock" select="'GẠCH BLOCK'"/>
         <xsl:variable name="bonnuoc" select="'BỒN NƯỚC INOX, BỒN NHỰA'"/>
+        <xsl:variable name="gachtrangtri" select="'GẠCH TRANG TRÍ CAO CẤP'"/>
+        <xsl:variable name="ngoilop" select="'NGÓI LỢP'"/>
         <xsl:variable name="vlxdkhac" select="'CÁC LOẠI VLXD KHÁC'"/>
         
         <xsl:element name="Materials" xmlns="http://tupt0101.github.io/xsd/materials">
@@ -35,6 +37,18 @@
                 <xsl:with-param name="categories" select="$categories"/>
                 <xsl:with-param name="categoryName" select="$bonnuoc"/>
                 <xsl:with-param name="categoryDisplayName" select="'BỒN NƯỚC INOX, BỒN NHỰA'"/>
+            </xsl:call-template>
+            
+            <xsl:call-template name="getCategoryNode">
+                <xsl:with-param name="categories" select="$categories"/>
+                <xsl:with-param name="categoryName" select="$gachtrangtri"/>
+                <xsl:with-param name="categoryDisplayName" select="'GẠCH TRANG TRÍ CAO CẤP'"/>
+            </xsl:call-template>
+            
+            <xsl:call-template name="getCategoryNode">
+                <xsl:with-param name="categories" select="$categories"/>
+                <xsl:with-param name="categoryName" select="$ngoilop"/>
+                <xsl:with-param name="categoryDisplayName" select="'NGÓI LỢP'"/>
             </xsl:call-template>
             
             <xsl:call-template name="getCategoryNode">
