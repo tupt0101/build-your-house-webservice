@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -94,5 +95,53 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     public Product insert(Product product) {
         super.create(product);
         return product;
+    }
+    
+    @GET
+    @Path("findCement")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findCement() {
+        TypedQuery query = em.createNamedQuery("Product.findCement", Product.class);
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findRock")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findRock() {
+        TypedQuery query = em.createNamedQuery("Product.findRock", Product.class);
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findSand")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findSand() {
+        TypedQuery query = em.createNamedQuery("Product.findSand", Product.class);
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findSteel")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findSteel() {
+        TypedQuery query = em.createNamedQuery("Product.findSteel", Product.class);
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findBrick")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findBrick() {
+        TypedQuery query = em.createNamedQuery("Product.findBrick", Product.class);
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findTile")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findTile() {
+        TypedQuery query = em.createNamedQuery("Product.findTile", Product.class);
+        return (List<Product>) query.getResultList();
     }
 }

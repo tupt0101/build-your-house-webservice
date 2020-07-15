@@ -99,36 +99,264 @@ public class DataResolver implements Serializable {
 
             // insert product to DB
             product = productClient.createProduct_XML(product, Product.class);
+            System.out.println(product.toString());
 
-            String[] productColors = product.getColor().split(" ");
-            for (int i = 0; i < productColors.length; i++) {
-                if (product.getName().toLowerCase().contains("gạch")) {
-                    if (productColors[i].toLowerCase().equals("đen")
-                            || productColors[i].toLowerCase().equals("xám")
-                            || productColors[i].toLowerCase().equals("nâu")
-                            || productColors[i].toLowerCase().equals("trắng")) {
-                        for (Tag tag : listTagFromDB) {
-                            if (tag.getName().equals("trung tính")) {
-                                TagProduct tagProduct = new TagProduct();
-                                tagProduct.setId(0);
-                                tagProduct.setProductID(product);
-                                tagProduct.setTagID(tag);
+            // gắn tag cho product
+            if (category.getName().toLowerCase().contains("gạch men")) {
+                // loại gạch
+                if (product.getName().toLowerCase().contains("men")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("gạch men")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setProductID(product);
+                            tagProduct.setTagID(tag);
 
-                                tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
-                                System.out.println("tag inserted: trung tinh");
-                            }
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: gach men");
                         }
-                    } else {
-                        for (Tag tag : listTagFromDB) {
-                            if (tag.getName().equals("tươi sáng")) {
-                                TagProduct tagProduct = new TagProduct();
-                                tagProduct.setId(0);
-                                tagProduct.setTagID(tag);
-                                tagProduct.setProductID(product);
+                    }
+                } else if (product.getName().toLowerCase().contains("granite")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("gạch granite")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setProductID(product);
+                            tagProduct.setTagID(tag);
 
-                                tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
-                                System.out.println("tag inserted: tươi sáng");
-                            }
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: gach granite");
+                        }
+                    }
+                }
+                
+                // màu trung tính
+                if (product.getColor().toLowerCase().contains("đen")
+                        || product.getColor().toLowerCase().contains("xám")
+                        || product.getColor().toLowerCase().contains("nâu")
+                        || product.getColor().toLowerCase().contains("trắng")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("trung tính")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setProductID(product);
+                            tagProduct.setTagID(tag);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: trung tinh");
+                        }
+                    }
+                    // màu tươi sáng
+                } else if (product.getColor().toLowerCase().contains("kem")
+                        || product.getColor().toLowerCase().contains("vàng")
+                        || product.getColor().toLowerCase().contains("xanh")
+                        || product.getColor().toLowerCase().contains("hồng")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("tươi sáng")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: tuoi sang");
+                        }
+                    }
+                    // sân vườn
+                }
+                if (product.getColor().toLowerCase().contains("sân")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("sân vườn")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: san vuon");
+                        }
+                    }
+                }
+                if (product.getColor().toLowerCase().contains("lá")
+                        || product.getColor().toLowerCase().contains("cỏ")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("cỏ")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: co");
+                        }
+                    }
+                } else if (product.getColor().toLowerCase().contains("sỏi đá")
+                        || product.getColor().toLowerCase().contains("khối đá")
+                        || product.getColor().toLowerCase().contains("sỏi,")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("sỏi đá")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: soi da");
+                        }
+                    }
+                }
+                if (product.getColor().toLowerCase().contains("vân đá")
+                        || product.getColor().toLowerCase().contains("vân")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("vân đá")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: van da");
+                        }
+                    }
+                } else if (product.getColor().toLowerCase().contains("họa")
+                        || product.getColor().toLowerCase().contains("hoa")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("họa tiết")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: hoa tiet");
+                        }
+                    }
+                }
+                if (product.getColor().toLowerCase().contains("kim cương")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("sang trọng")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: sang trong");
+                        }
+                    }
+                }
+                // mệnh kim
+                if (product.getColor().toLowerCase().contains("trắng")
+                        || product.getColor().toLowerCase().contains("ghi")
+                        || product.getColor().toLowerCase().contains("xám")
+                        || product.getColor().toLowerCase().contains("vàng")
+                        || product.getColor().toLowerCase().contains("cam")
+                        || product.getColor().toLowerCase().contains("nâu")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("mệnh kim")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: menh kim");
+                        }
+                    }
+                }
+                // mệnh mộc
+                if (product.getColor().toLowerCase().contains("xanh")
+                        || product.getColor().toLowerCase().contains("xanh lá")
+                        || product.getColor().toLowerCase().contains("đen")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("mệnh mộc")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: menh moc");
+                        }
+                    }
+                }
+                //mệnh thủy
+                if (product.getColor().toLowerCase().contains("trắng")
+                        || product.getColor().toLowerCase().contains("ghi")
+                        || product.getColor().toLowerCase().contains("xám")
+                        || product.getColor().toLowerCase().contains("đen")
+                        || product.getColor().toLowerCase().contains("xanh")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("mệnh thủy")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: menh thuy");
+                        }
+                    }
+                }
+                //mệnh hỏa
+                if (product.getColor().toLowerCase().contains("đỏ")
+                        || product.getColor().toLowerCase().contains("hồng")
+                        || product.getColor().toLowerCase().contains("tím")
+                        || product.getColor().toLowerCase().contains("xanh lá")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("mệnh hỏa")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: menh hoa");
+                        }
+                    }
+                }
+                //mệnh thổ
+                if (product.getColor().toLowerCase().contains("vàng")
+                        || product.getColor().toLowerCase().contains("cam")
+                        || product.getColor().toLowerCase().contains("nâu")
+                        || product.getColor().toLowerCase().contains("đỏ")
+                        || product.getColor().toLowerCase().contains("hồng")
+                        || product.getColor().toLowerCase().contains("tím")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("mệnh thổ")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: menh tho");
+                        }
+                    }
+                }
+                String sizeStr[] = product.getSize().split("x");
+                if (sizeStr[0].equals(sizeStr[1])) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("gạch vuông")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: gach vuong");
+                        }
+                    }
+                } else {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("gạch chữ nhật")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: gach chu nhat");
                         }
                     }
                 }

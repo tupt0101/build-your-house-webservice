@@ -29,10 +29,13 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(tupt.entities.service.AnswerFacadeREST.class);
         resources.add(tupt.entities.service.CategoryFacadeREST.class);
         resources.add(tupt.entities.service.ProductFacadeREST.class);
+        resources.add(tupt.entities.service.QuestionFacadeREST.class);
         resources.add(tupt.entities.service.RegistrationFacadeREST.class);
         resources.add(tupt.entities.service.SupplierFacadeREST.class);
+        resources.add(tupt.entities.service.TagAnswerFacadeREST.class);
         resources.add(tupt.entities.service.TagFacadeREST.class);
         resources.add(tupt.entities.service.TagProductFacadeREST.class);
     }
