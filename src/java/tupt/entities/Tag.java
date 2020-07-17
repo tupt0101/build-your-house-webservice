@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t")
     , @NamedQuery(name = "Tag.findById", query = "SELECT t FROM Tag t WHERE t.id = :id")
-    , @NamedQuery(name = "Tag.findByName", query = "SELECT t FROM Tag t WHERE t.name = :name")})
+    , @NamedQuery(name = "Tag.findByName", query = "SELECT t FROM Tag t WHERE t.name = :name")
+    , @NamedQuery(name = "Tag.findByAnswerID", query = "SELECT t FROM Tag t INNER JOIN TagAnswer ta ON ta.tagID = t.ID WHERE ta.answerID.id = :answerID")
+})
 public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +45,9 @@ public class Tag implements Serializable {
     @Size(max = 50)
     @Column(name = "Name")
     private String name;
+    @Size(max = 200)
+    @Column(name = "Description")
+    private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tagID")
     private Collection<TagProduct> tagProductCollection;
 
@@ -67,6 +72,14 @@ public class Tag implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @XmlTransient
@@ -102,5 +115,5 @@ public class Tag implements Serializable {
     public String toString() {
         return "tupt.entities.Tag[ id=" + id + " ]";
     }
-    
+
 }

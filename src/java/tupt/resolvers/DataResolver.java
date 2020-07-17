@@ -106,7 +106,7 @@ public class DataResolver implements Serializable {
                 // loại gạch
                 if (product.getName().toLowerCase().contains("men")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("gạch men")) {
+                        if (tag.getName().equals("gach men")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setProductID(product);
@@ -118,7 +118,7 @@ public class DataResolver implements Serializable {
                     }
                 } else if (product.getName().toLowerCase().contains("granite")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("gạch granite")) {
+                        if (tag.getName().equals("gach granite")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setProductID(product);
@@ -129,14 +129,14 @@ public class DataResolver implements Serializable {
                         }
                     }
                 }
-                
+
                 // màu trung tính
                 if (product.getColor().toLowerCase().contains("đen")
                         || product.getColor().toLowerCase().contains("xám")
                         || product.getColor().toLowerCase().contains("nâu")
                         || product.getColor().toLowerCase().contains("trắng")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("trung tính")) {
+                        if (tag.getName().equals("trung tinh")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setProductID(product);
@@ -152,7 +152,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("xanh")
                         || product.getColor().toLowerCase().contains("hồng")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("tươi sáng")) {
+                        if (tag.getName().equals("tuoi sang")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -162,25 +162,11 @@ public class DataResolver implements Serializable {
                             System.out.println("tag inserted: tuoi sang");
                         }
                     }
-                    // sân vườn
-                }
-                if (product.getColor().toLowerCase().contains("sân")) {
-                    for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("sân vườn")) {
-                            TagProduct tagProduct = new TagProduct();
-                            tagProduct.setId(0);
-                            tagProduct.setTagID(tag);
-                            tagProduct.setProductID(product);
-
-                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
-                            System.out.println("tag inserted: san vuon");
-                        }
-                    }
                 }
                 if (product.getColor().toLowerCase().contains("lá")
                         || product.getColor().toLowerCase().contains("cỏ")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("cỏ")) {
+                        if (tag.getName().equals("co")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -194,7 +180,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("khối đá")
                         || product.getColor().toLowerCase().contains("sỏi,")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("sỏi đá")) {
+                        if (tag.getName().equals("soi da")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -205,23 +191,28 @@ public class DataResolver implements Serializable {
                         }
                     }
                 }
-                if (product.getColor().toLowerCase().contains("vân đá")
-                        || product.getColor().toLowerCase().contains("vân")) {
+                // sân vườn
+                if (product.getColor().toLowerCase().contains("sân")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("vân đá")) {
+                        if (tag.getName().equals("san vuon")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
                             tagProduct.setProductID(product);
 
                             tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
-                            System.out.println("tag inserted: van da");
+                            System.out.println("tag inserted: san vuon");
                         }
                     }
-                } else if (product.getColor().toLowerCase().contains("họa")
+                }
+                // vân đá
+                else if (product.getColor().toLowerCase().contains("vân đá")
+                        || product.getColor().toLowerCase().contains("vân gỗ")
+                        || product.getColor().toLowerCase().contains("vân cát")
+                        || product.getColor().toLowerCase().contains("họa")
                         || product.getColor().toLowerCase().contains("hoa")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("họa tiết")) {
+                        if (tag.getName().equals("hoa tiet")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -231,17 +222,29 @@ public class DataResolver implements Serializable {
                             System.out.println("tag inserted: hoa tiet");
                         }
                     }
-                }
-                if (product.getColor().toLowerCase().contains("kim cương")) {
+                } else {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("sang trọng")) {
+                        if (tag.getName().equals("tron")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
                             tagProduct.setProductID(product);
 
                             tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
-                            System.out.println("tag inserted: sang trong");
+                            System.out.println("tag inserted: tron");
+                        }
+                    }
+                }
+                if (product.getColor().toLowerCase().contains("kim cương")) {
+                    for (Tag tag : listTagFromDB) {
+                        if (tag.getName().equals("hoa tiet")) {
+                            TagProduct tagProduct = new TagProduct();
+                            tagProduct.setId(0);
+                            tagProduct.setTagID(tag);
+                            tagProduct.setProductID(product);
+
+                            tagProductClient.createTagProduct_XML(tagProduct, TagProduct.class);
+                            System.out.println("tag inserted: hoa tiet");
                         }
                     }
                 }
@@ -253,7 +256,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("cam")
                         || product.getColor().toLowerCase().contains("nâu")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("mệnh kim")) {
+                        if (tag.getName().equals("menh kim")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -269,7 +272,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("xanh lá")
                         || product.getColor().toLowerCase().contains("đen")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("mệnh mộc")) {
+                        if (tag.getName().equals("menh moc")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -287,7 +290,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("đen")
                         || product.getColor().toLowerCase().contains("xanh")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("mệnh thủy")) {
+                        if (tag.getName().equals("menh thuy")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -304,7 +307,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("tím")
                         || product.getColor().toLowerCase().contains("xanh lá")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("mệnh hỏa")) {
+                        if (tag.getName().equals("menh hoa")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -323,7 +326,7 @@ public class DataResolver implements Serializable {
                         || product.getColor().toLowerCase().contains("hồng")
                         || product.getColor().toLowerCase().contains("tím")) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("mệnh thổ")) {
+                        if (tag.getName().equals("menh tho")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -337,7 +340,7 @@ public class DataResolver implements Serializable {
                 String sizeStr[] = product.getSize().split("x");
                 if (sizeStr[0].equals(sizeStr[1])) {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("gạch vuông")) {
+                        if (tag.getName().equals("gach vuong")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);
@@ -349,7 +352,7 @@ public class DataResolver implements Serializable {
                     }
                 } else {
                     for (Tag tag : listTagFromDB) {
-                        if (tag.getName().equals("gạch chữ nhật")) {
+                        if (tag.getName().equals("gach chu nhat")) {
                             TagProduct tagProduct = new TagProduct();
                             tagProduct.setId(0);
                             tagProduct.setTagID(tag);

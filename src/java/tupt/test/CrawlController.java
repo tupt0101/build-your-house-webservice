@@ -22,7 +22,7 @@ import tupt.resolvers.DataResolver;
  *
  * @author sherl
  */
-@WebServlet(name = "TestController", urlPatterns = {"/TestController"})
+@WebServlet(name = "CrawlController", urlPatterns = {"/crawl"})
 public class CrawlController extends HttpServlet {
 
     private static final String SUCCESS = "index.html";

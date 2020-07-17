@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,30 +25,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sherl
  */
 @Entity
-@Table(name = "TagAnswer")
+@Table(name = "Favorite")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TagAnswer.findAll", query = "SELECT t FROM TagAnswer t")
-    , @NamedQuery(name = "TagAnswer.findById", query = "SELECT t FROM TagAnswer t WHERE t.id = :id")})
-public class TagAnswer implements Serializable {
+    @NamedQuery(name = "Favorite.findAll", query = "SELECT f FROM Favorite f")
+    , @NamedQuery(name = "Favorite.findById", query = "SELECT f FROM Favorite f WHERE f.id = :id")})
+public class Favorite implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Integer id;
-    @JoinColumn(name = "AnswerID", referencedColumnName = "ID")
+    @JoinColumn(name = "ProductID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Answer answerID;
-    @JoinColumn(name = "TagID", referencedColumnName = "ID")
+    private Product productID;
+    @JoinColumn(name = "AccountID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Tag tagID;
+    private Registration accountID;
 
-    public TagAnswer() {
+    public Favorite() {
     }
 
-    public TagAnswer(Integer id) {
+    public Favorite(Integer id) {
         this.id = id;
     }
 
@@ -58,20 +61,20 @@ public class TagAnswer implements Serializable {
         this.id = id;
     }
 
-    public Answer getAnswerID() {
-        return answerID;
+    public Product getProductID() {
+        return productID;
     }
 
-    public void setAnswerID(Answer answerID) {
-        this.answerID = answerID;
+    public void setProductID(Product productID) {
+        this.productID = productID;
     }
 
-    public Tag getTagID() {
-        return tagID;
+    public Registration getAccountID() {
+        return accountID;
     }
 
-    public void setTagID(Tag tagID) {
-        this.tagID = tagID;
+    public void setAccountID(Registration accountID) {
+        this.accountID = accountID;
     }
 
     @Override
@@ -84,10 +87,10 @@ public class TagAnswer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TagAnswer)) {
+        if (!(object instanceof Favorite)) {
             return false;
         }
-        TagAnswer other = (TagAnswer) object;
+        Favorite other = (Favorite) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -96,7 +99,7 @@ public class TagAnswer implements Serializable {
 
     @Override
     public String toString() {
-        return "tupt.entities.TagAnswer[ id=" + id + " ]";
+        return "tupt.entities.Favorite[ id=" + id + " ]";
     }
     
 }

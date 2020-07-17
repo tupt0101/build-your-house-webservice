@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(tupt.entities.service.AnswerFacadeREST.class);
         resources.add(tupt.entities.service.CategoryFacadeREST.class);
+        resources.add(tupt.entities.service.FavoriteFacadeREST.class);
         resources.add(tupt.entities.service.ProductFacadeREST.class);
         resources.add(tupt.entities.service.QuestionFacadeREST.class);
         resources.add(tupt.entities.service.RegistrationFacadeREST.class);

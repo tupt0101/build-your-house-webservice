@@ -5,6 +5,8 @@
  */
 package tupt.entities.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import tupt.entities.Product;
 
@@ -96,7 +99,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         super.create(product);
         return product;
     }
-    
+
     @GET
     @Path("findCement")
     @Produces(MediaType.APPLICATION_XML)
@@ -104,7 +107,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         TypedQuery query = em.createNamedQuery("Product.findCement", Product.class);
         return (List<Product>) query.getResultList();
     }
-    
+
     @GET
     @Path("findRock")
     @Produces(MediaType.APPLICATION_XML)
@@ -112,7 +115,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         TypedQuery query = em.createNamedQuery("Product.findRock", Product.class);
         return (List<Product>) query.getResultList();
     }
-    
+
     @GET
     @Path("findSand")
     @Produces(MediaType.APPLICATION_XML)
@@ -120,7 +123,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         TypedQuery query = em.createNamedQuery("Product.findSand", Product.class);
         return (List<Product>) query.getResultList();
     }
-    
+
     @GET
     @Path("findSteel")
     @Produces(MediaType.APPLICATION_XML)
@@ -128,7 +131,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         TypedQuery query = em.createNamedQuery("Product.findSteel", Product.class);
         return (List<Product>) query.getResultList();
     }
-    
+
     @GET
     @Path("findBrick")
     @Produces(MediaType.APPLICATION_XML)
@@ -136,12 +139,44 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         TypedQuery query = em.createNamedQuery("Product.findBrick", Product.class);
         return (List<Product>) query.getResultList();
     }
-    
+
     @GET
     @Path("findTile")
     @Produces(MediaType.APPLICATION_XML)
     public List<Product> findTile() {
         TypedQuery query = em.createNamedQuery("Product.findTile", Product.class);
         return (List<Product>) query.getResultList();
+    }
+
+    @GET
+    @Path("findProductByTag")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findProductByTag(@QueryParam("tag1") String tag1, @QueryParam("tag2") String tag2,
+            @QueryParam("tag3") String tag3, @QueryParam("tag4") String tag4, @QueryParam("tag5") String tag5) {
+
+        String sql = "SELECT a.ID, a.Num FROM " +
+                        "(SELECT p.ID, COUNT(*) as Num " +
+                        "FROM Product p " +
+                        "JOIN TagProduct tp ON p.ID = tp.productID " +
+                        "JOIN Tag t ON t.ID = tp.tagID " +
+                        "WHERE t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? " +
+                        "GROUP BY p.ID) a " +
+                        "WHERE a.Num = 5";
+    
+        TypedQuery query = (TypedQuery) getEntityManager().createNativeQuery(sql);
+        query.setParameter(1, tag1);
+        query.setParameter(2, tag2);
+        query.setParameter(3, tag3);
+        query.setParameter(4, tag4);
+        query.setParameter(5, tag5);
+
+        List<Object[]> objects = query.getResultList();
+        List<Product> result = new ArrayList<>();
+        for (Object[] row : objects) {
+            Product product = getEntityManager().find(Product.class, row[0]);
+            result.add(product);
+        }
+        System.out.println("result test: " + result.size());
+        return result;
     }
 }

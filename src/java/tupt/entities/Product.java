@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,6 +49,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findSteel", query = "SELECT p FROM Product p WHERE p.name LIKE 'thép%' AND p.unit = 'kg'")
     , @NamedQuery(name = "Product.findBrick", query = "SELECT p FROM Product p WHERE p.name LIKE 'gạch%6 lỗ%'")
     , @NamedQuery(name = "Product.findTile", query = "SELECT p FROM Product p WHERE p.name LIKE 'ngói lợp%' OR p.name LIKE 'ngói màu%'")
+})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Product.findProductByTag", query = "SELECT TOP 10 a.ID FROM " +
+                                                        "(SELECT p.ID, COUNT(*) as Num " +
+                                                        "FROM Product p " +
+                                                        "JOIN TagProduct tp ON p.ID = tp.productID " +
+                                                        "JOIN Tag t ON t.ID = tp.tagID " +
+                                                        "WHERE t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? " +
+                                                        "GROUP BY p.ID) a " +
+                                                        "WHERE a.Num = 5")
 })
 public class Product implements Serializable {
 
