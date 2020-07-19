@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Favorite.findAll", query = "SELECT f FROM Favorite f")
-    , @NamedQuery(name = "Favorite.findById", query = "SELECT f FROM Favorite f WHERE f.id = :id")})
+    , @NamedQuery(name = "Favorite.findById", query = "SELECT f FROM Favorite f WHERE f.id = :id")
+    , @NamedQuery(name = "Favorite.findToRemove", query = "SELECT f FROM Favorite f WHERE f.productID = :productID AND f.accountID = :accountID")
+})
 public class Favorite implements Serializable {
 
     private static final long serialVersionUID = 1L;

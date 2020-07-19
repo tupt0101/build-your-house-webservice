@@ -179,4 +179,15 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         System.out.println("result test: " + result.size());
         return result;
     }
+    
+    @GET
+    @Path("findFavoriteProduct")
+    @Produces(MediaType.APPLICATION_XML)
+    public String findFavoriteProduct(@QueryParam("accountID") int accountID) {
+        Object result = em.createNamedQuery("findFavoriteProduct").setParameter(1, accountID).getSingleResult();
+        if (result != null) {
+            return result.toString();
+        }
+        return "";
+    }
 }

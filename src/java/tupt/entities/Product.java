@@ -58,7 +58,13 @@ import javax.xml.bind.annotation.XmlTransient;
                                                         "JOIN Tag t ON t.ID = tp.tagID " +
                                                         "WHERE t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? or t.Name = ? " +
                                                         "GROUP BY p.ID) a " +
-                                                        "WHERE a.Num = 5")
+                                                        "WHERE a.Num = 5"),
+    @NamedNativeQuery(name="findFavoriteProduct", query = "SELECT CAST ((SELECT p.* FROM Product p "
+                                                        + "JOIN Favorite f on f.ProductID = p.ID "
+                                                        + "WHERE AccountID = ? "
+                                                        + "FOR XML PATH('product'), Root('favorites')) "
+                                                        + "AS NVARCHAR(MAX)) "
+                                                        + "AS XMLDATA")
 })
 public class Product implements Serializable {
 

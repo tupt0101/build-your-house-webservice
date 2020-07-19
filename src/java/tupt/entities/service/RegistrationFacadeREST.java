@@ -99,4 +99,12 @@ public class RegistrationFacadeREST extends AbstractFacade<Registration> {
         query.setParameter("password", password);
         return (Registration) query.getSingleResult();
     }
+    
+    @POST
+    @Path("insert")
+    @Consumes(MediaType.APPLICATION_XML)
+    public Registration insert(Registration favorite) {
+        super.create(favorite);
+        return favorite;
+    }
 }

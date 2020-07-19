@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,8 +18,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import tupt.entities.Favorite;
+import tupt.entities.Product;
+import tupt.entities.Registration;
 
 /**
  *
@@ -94,5 +98,13 @@ public class FavoriteFacadeREST extends AbstractFacade<Favorite> {
     public Favorite insert(Favorite favorite) {
         super.create(favorite);
         return favorite;
+    }
+    
+    @GET
+    @Path("findToRemove")
+    @Produces(MediaType.APPLICATION_XML)
+    public String findToRemove(@QueryParam("productID") int productID, @QueryParam("accountID") int accountID) {
+        String sql = "SELECT f.ID FROM Favorite f WHERE f.AccountID = ? AND f.ProductID = ?";
+        return getEntityManager().createNativeQuery(sql).setParameter(1, accountID).setParameter(2, productID).getSingleResult().toString();
     }
 }
