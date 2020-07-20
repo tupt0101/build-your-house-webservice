@@ -50,6 +50,7 @@ public class CrawlController extends HttpServlet {
                 
                 // Get list category
                 NodeList listHref = domResult.getNode().getChildNodes().item(0).getChildNodes();
+                System.out.println("cate: " + listHref.item(0).getTextContent());
                 
                 for (int j = 0; j < listHref.getLength(); j++) {
                     ArrayList<DOMResult> domResults = (ArrayList<DOMResult>) Crawler

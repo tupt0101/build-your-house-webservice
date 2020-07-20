@@ -15,7 +15,7 @@ import java.util.List;
 public class DomainConstant {
 
 	public static final String DEV = "http://localhost:8080";
-	public static final String DONGTAM = "https://dongtamshop.com";
+	public static final String DONGTAM = "http://dongtamshop.com";
 	public static final String VLXD24H = "http://vatlieuxaydung24h.vn";
 	public static final String TEST = "https://www.materialtree.com";
 

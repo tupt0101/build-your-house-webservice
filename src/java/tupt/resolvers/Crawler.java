@@ -33,7 +33,7 @@ public class Crawler implements Serializable {
 
     public static List<DOMResult> doCrawlFromPaginatedSite(String xmlConfigPath, String xslPath, String hrefName, String hrefValue)
             throws FileNotFoundException, TransformerConfigurationException, TransformerException, IOException, Exception {
-
+        
         /**
          * Parse XML file to DOM
          */
@@ -47,7 +47,7 @@ public class Crawler implements Serializable {
 
         Document doc = (Document) domResult.getNode();
         Node materialNode = doc.getChildNodes().item(0);
-
+        
         /**
          * Add page number
          */
@@ -55,9 +55,10 @@ public class Crawler implements Serializable {
         HTMLResolver htmlResolver = new HTMLResolver();
         factory.setURIResolver(htmlResolver);
         transformer = factory.newTransformer(xslStreamSource);
-
+      
         ArrayList<DOMResult> domResults = new ArrayList<>();
         int pageNo = 1;
+        System.out.println("hrefValue: " + hrefValue); 
         while (true) {
             domResult = new DOMResult();
             // Update href attribute
@@ -69,6 +70,7 @@ public class Crawler implements Serializable {
             }
             materialNode.getAttributes().getNamedItem(hrefName).setNodeValue(newHref);
 
+            System.out.println("newHref: " + newHref);
             InputStream is = DocumentUtil.parseDocumentToInputStream(doc);
             StreamSource streamSource = new StreamSource(is);
             transformer.transform(streamSource, domResult);
