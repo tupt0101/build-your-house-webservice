@@ -189,4 +189,23 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         }
         return "";
     }
+    
+    @PUT
+    @Path("updatePC/{id}")
+    @Consumes({MediaType.APPLICATION_XML})
+    public Product updateProductOccurrence(@PathParam("id") Long id, Product entity) {
+        super.edit(entity);
+        return entity;
+    }
+    
+    @GET
+    @Path("findTrendingProduct")
+    @Produces(MediaType.APPLICATION_XML)
+    public String findTrendingProduct() {
+        Object result = em.createNamedQuery("findTrendingProduct").getSingleResult();
+        if (result != null) {
+            return result.toString();
+        }
+        return "";
+    }
 }

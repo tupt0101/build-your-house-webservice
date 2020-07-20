@@ -64,7 +64,13 @@ import javax.xml.bind.annotation.XmlTransient;
                                                         + "WHERE AccountID = ? "
                                                         + "FOR XML PATH('product'), Root('favorites')) "
                                                         + "AS NVARCHAR(MAX)) "
-                                                        + "AS XMLDATA")
+                                                        + "AS XMLDATA"),
+    @NamedNativeQuery(name="findTrendingProduct", query = "SELECT CAST ((SELECT TOP 3 p.* FROM Product p "
+                                                        + "WHERE p.Occurrence > 0 "
+                                                        + "ORDER BY p.Occurrence DESC "
+                                                        + "FOR XML PATH('product'), Root('trending')) "
+                                                        + "AS NVARCHAR(MAX)) "
+                                                        + "AS XMLDATA"),
 })
 public class Product implements Serializable {
 
@@ -98,6 +104,8 @@ public class Product implements Serializable {
     @Size(max = 10)
     @Column(name = "Unit")
     private String unit;
+    @Column(name = "Occurrence")
+    private Integer occurrence;
     @JoinColumn(name = "Category", referencedColumnName = "ID")
     @ManyToOne
     private Category category;
@@ -174,6 +182,14 @@ public class Product implements Serializable {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public Integer getOccurrence() {
+        return occurrence;
+    }
+
+    public void setOccurrence(Integer occurrence) {
+        this.occurrence = occurrence;
     }
 
     public Category getCategory() {
