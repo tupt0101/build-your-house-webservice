@@ -208,4 +208,24 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         }
         return "";
     }
+    
+    @GET
+    @Path("findByLikeName")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findByLikeName(@QueryParam("name") String name) {
+        TypedQuery query = em.createNamedQuery("Product.findByLikeName", Product.class);
+        query.setParameter("name", "%" + name + "%");
+        return (List<Product>) query.getResultList();
+    }
+    
+    @GET
+    @Path("findByLikeNamePagination")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Product> findByLikeNamePagination(@QueryParam("name") String name, @QueryParam("pageNumber") int pageNumber, @QueryParam("pageSize") int pageSize) {
+        TypedQuery query = em.createNamedQuery("Product.findByLikeNamePagination", Product.class);
+        query.setParameter("name", "%" + name + "%");
+        query.setFirstResult((pageNumber - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        return (List<Product>) query.getResultList();
+    }
 }

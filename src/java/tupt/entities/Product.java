@@ -49,6 +49,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findSteel", query = "SELECT p FROM Product p WHERE p.name LIKE 'thép%' AND p.unit = 'kg'")
     , @NamedQuery(name = "Product.findBrick", query = "SELECT p FROM Product p WHERE p.name LIKE 'gạch%6 lỗ%'")
     , @NamedQuery(name = "Product.findTile", query = "SELECT p FROM Product p WHERE p.name LIKE 'ngói lợp%' OR p.name LIKE 'ngói màu%'")
+    , @NamedQuery(name = "Product.findByLikeName", query = "SELECT p FROM Product p WHERE p.name LIKE :name ORDER BY p.occurrence DESC")
+    , @NamedQuery(name = "Product.findByLikeNamePagination", query = "SELECT p FROM Product p WHERE p.name LIKE :name ORDER BY p.name DESC")
 })
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Product.findProductByTag", query = "SELECT TOP 10 a.ID FROM " +
